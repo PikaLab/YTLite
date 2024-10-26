@@ -161,18 +161,18 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos  
 
-      - name: Build iSponsorBlock
-        run: |
-          cd ${{ github.workspace }}/iSponsorBlock
-          make clean package DEBUG=0 FINALPACKAGE=1
-          mv packages/*.deb ${{ github.workspace }}/isb.deb
-        env:
-          THEOS: ${{ github.workspace }}/theos  
+      # - name: Build iSponsorBlock
+      #   run: |
+      #     cd ${{ github.workspace }}/iSponsorBlock
+      #     make clean package DEBUG=0 FINALPACKAGE=1
+      #     mv packages/*.deb ${{ github.workspace }}/isb.deb
+      #   env:
+      #     THEOS: ${{ github.workspace }}/theos  
 
       - name: Inject tweaks into IPA
         run: |
           cyan -i youtube.ipa -o YouTubePlus_${{ inputs.tweak_version }}_Tweaks.ipa \
-            -uwf ytplus.deb OpenYoutubeSafariExtension.appex youpip.deb ytuhd.deb ryd.deb demc.deb isb.deb
+            -uwf ytplus.deb OpenYoutubeSafariExtension.appex youpip.deb ytuhd.deb ryd.deb demc.deb
 
       - name: Upload to GitHub Releases
         uses: softprops/action-gh-release@v2.0.1
